@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard"
-import resList from "../utils/mockData"
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import  Shimmer  from "./Shimmer";
 const Body = () => {
@@ -14,14 +14,14 @@ const Body = () => {
     const fetchData = async () => {
         const data = await fetch( "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json()
-        const fetchedList = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        const fetchedList = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRestaurants(fetchedList)
         setFilteredRestaurants(fetchedList)
     
     }
     //conditional rendering
    console.log('Body Re rendered')
-    return listOfRestaurants.length === 0 ?  <Shimmer /> :  (
+    return listOfRestaurants?.length === 0 ?  <Shimmer /> :  (
         <div className="body">
             <div className="filter">
                 <div className="search">
@@ -49,8 +49,8 @@ const Body = () => {
             <div className="restaurant-container">
 
                {
-                filteredRestaurants.map((res)=> (
-            <RestaurantCard key={res.info.id} resData = {res}/>
+                filteredRestaurants?.map((res)=> (
+          <Link key={res.info.id}  to={"/restaurants/" + res.info.id}><RestaurantCard resData = {res}/></Link>  
                     
                 ))
                }
