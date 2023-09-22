@@ -1,8 +1,10 @@
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard, {withVegLabel} from "./RestaurantCard"
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import  Shimmer  from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+
 
 
 const Body = () => {
@@ -22,6 +24,8 @@ const Body = () => {
         setFilteredRestaurants(fetchedList)
     
     }
+    const {setUserInfo, loggedInUser} = useContext(UserContext)
+    const RestaurantCardVeg = withVegLabel(RestaurantCard)
 
     const onlineStatus = useOnlineStatus()
     if(onlineStatus === false) return (
@@ -30,7 +34,7 @@ const Body = () => {
         </h1>
     )
     //conditional rendering
-   console.log('Body Re rendered')
+   console.log('Body Re rendered' , listOfRestaurants)
     return listOfRestaurants?.length === 0 ?  <Shimmer /> :  (
         <div className="body">
             <div className="filter flex">
@@ -57,12 +61,21 @@ const Body = () => {
 
                     }}>Top Rated Restaurants</button>
                 </div>
+                <div className="m-4 p-4">
+                    <label>Username: </label>
+                    <input className="border border-black mt-5 p-2" onChange={(e)=> {
+                        setUserInfo(e.target.value)
+                    }} value={loggedInUser}/>
+                </div>
             </div>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap m-6">
 
                {
                 filteredRestaurants?.map((res)=> (
-          <Link key={res.info.id}  to={"/restaurants/" + res.info.id}><RestaurantCard resData = {res}/></Link>  
+          <Link key={res.info.id}  to={"/restaurants/" + res.info.id}>
+            {res.info?.veg !== undefined ?( <RestaurantCardVeg resData={res} /> ): ( <RestaurantCard resData = {res}/>)  }
+           
+            </Link>  
                     
                 ))
                }

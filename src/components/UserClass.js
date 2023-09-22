@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import UserContext from '../utils/UserContext'
 class UserClass extends React.Component {
     
     constructor(props){
@@ -15,7 +15,6 @@ class UserClass extends React.Component {
         }
 
     }
-
     async componentDidMount(){
         //api calls
         const data = await fetch("https://api.github.com/users/umangd98")
@@ -33,6 +32,11 @@ class UserClass extends React.Component {
         return (
             <div className="user-card m-4 p-4 bg-gray-50 rounded-md">
             <img src={image_url}/>
+            <div>
+              <UserContext.Consumer>
+                    {({loggedInUser}) => <p className='text-lg font-bold'>    Loggedin User :  {loggedInUser} </p>}
+                </UserContext.Consumer>
+            </div>
             <h2>Name: {name}</h2>
             <h3>Location: {location}</h3>
             <h4>Contact: <a target='blank_' href={contact}>{name}</a></h4>

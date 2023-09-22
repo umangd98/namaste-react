@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header"
 import Body from "./components/Body";
@@ -8,6 +8,7 @@ import About from "./components/About";
 import Error from "./components/Error";
 
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 
 
 
@@ -21,12 +22,29 @@ const styleCard = {
 
 
 const AppLayout = () => {
+
+    const [userInfo, setUserInfo] = useState()
+    
+
+    //auth
+
+    useEffect(()=> {
+        //make api call
+        const data = {
+            name: "Umang Dhandhania"
+        }
+        setUserInfo(data.name)
+    }, [])
+
     return (
+        <UserContext.Provider value={{loggedInUser: userInfo
+        , setUserInfo}}>
         <div className="app">
             <Header />
             <Outlet />
             {/* <Body /> */}
         </div>
+        </UserContext.Provider>
     )
 }
 
