@@ -34,12 +34,12 @@ const Body = () => {
         </h1>
     )
     //conditional rendering
-   console.log('Body Re rendered' , listOfRestaurants)
+//    console.log('Body Re rendered' , listOfRestaurants)
     return listOfRestaurants?.length === 0 ?  <Shimmer /> :  (
         <div className="body">
             <div className="filter flex">
                 <div className="search m-4 p-4">
-                    <input type="text" className="border border-solid border-black" value={searchText} onChange={
+                    <input type="text" data-testid ="searchInput" className="border border-solid border-black" value={searchText} onChange={
                         (e)=>{
                             setSearchText(e.target.value)
                         }
@@ -56,7 +56,7 @@ const Body = () => {
                     <button className="px-4 py-2 bg-gray-200 m-4 rounded-lg shadow-md" onClick={()=>{
                         // console.log('button clicked')
                         const filteredList = listOfRestaurants.filter(res => res.info.avgRating>4)
-                        console.log('filtered list => ', filteredList)
+                        // console.log('filtered list => ', filteredList)
                         setFilteredRestaurants(filteredList)
 
                     }}>Top Rated Restaurants</button>

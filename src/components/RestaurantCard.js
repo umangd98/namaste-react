@@ -7,7 +7,7 @@ const RestaurantCard = ({resData}) => {
     const {loggedInUser} = useContext(UserContext)
     const {name, cuisines, avgRating, costForTwo, sla, cloudinaryImageId} = resData?.info
     return (
-        <div className="m-4 p-4 w-[250px] rounded-md hover:bg-gray-200 bg-gray-100" >
+        <div data-testid = "resCard" className="m-4 p-4 w-[250px] rounded-md hover:bg-gray-200 bg-gray-100" >
             <img className="object-fill h-32 w-56 rounded-md"
              src={CDN_URL + cloudinaryImageId}/>
              <h3 className="font-bold py-4 text-lg">{name}</h3>

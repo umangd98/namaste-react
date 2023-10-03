@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../utils/cartSlice';
 
 const ItemList = ({items}) => {
-    console.log('items -> ', items);
+    // console.log('items -> ', items);
 
     const dispatch = useDispatch()
 
@@ -16,7 +16,7 @@ const ItemList = ({items}) => {
   return (
     <div>
         {items?.map(item =>
-        <div key={item.card.info.id} className='p-2 m-2 border border-b-gray-200 text-left'>
+        <div data-testid = "fooditems" key={item.card.info.id} className='p-2 m-2 border border-b-gray-200 text-left'>
             <div className='py-2 flex justify-between align-middle'>
                 <div className='w-9/12'> 
                     <span className='block'>{item.card.info.name}</span>

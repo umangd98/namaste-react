@@ -3,11 +3,11 @@ import ItemList from './ItemList'
 
 const RestaurantCategory = ({data, showItems, setShowIndex}) => {
     // const [showItems, setShowItems] = useState(false)
-    console.log('functino in ', setShowIndex)
+    // console.log('functino in ', setShowIndex)
     const handleClick = () => {
      setShowIndex()
     }
- console.log(data)
+//  console.log(data)
   return (
     <div>
         

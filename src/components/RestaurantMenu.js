@@ -17,10 +17,10 @@ const RestaurantMenu = () => {
     
     const {name, cuisines, costForTwoMessage, locality } = resInfo?.cards[0]?.card?.card?.info;
     const {itemCards}  = resInfo?.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card
-    console.log('menu -> ', resInfo?.cards[2].groupedCard.cardGroupMap.REGULAR.cards)
+    // console.log('menu -> ', resInfo?.cards[2].groupedCard.cardGroupMap.REGULAR.cards)
 
     const categories = resInfo?.cards[2].groupedCard.cardGroupMap.REGULAR.cards.filter(c => c.card?.card?.["@type"].includes("v2.ItemCategory"))
-    console.log('filtered -> ', categories)
+    // console.log('filtered -> ', categories)
     return  (
         <div className="p-4 m-4 text-center">
             <h1 className="text-2xl font-bold my-3">{name}</h1>
